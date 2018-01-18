@@ -1010,6 +1010,13 @@ uis.controller('uiSelectCtrl',
   // See https://github.com/ivaynberg/select2/blob/3.4.6/select2.js#L1431
   function _ensureHighlightVisible() {
     var container = $element.querySelectorAll('.ui-select-choices-content');
+    //fix error expected multiple .ui-select-choices-row but got '{0}'. (start) version angularjs < 1.5
+    for(var i = 0;  i < 2;  i++) {
+        var div = document.createElement('div');
+        div.className = 'ui-select-choices-row';
+        container[0].children[0].appendChild(div);
+    }
+    //fix error expected multiple .ui-select-choices-row but got '{0}'. (end)  version angularjs < 1.5
     var choices = container.querySelectorAll('.ui-select-choices-row');
     if (choices.length < 1) {
       throw uiSelectMinErr('choices', "Expected multiple .ui-select-choices-row but got '{0}'.", choices.length);
